@@ -3,6 +3,9 @@ uuid = "2bebaaf1-bf07-49c4-aa09-2f9835f7216c"
 authors = ["Dhruv Vaish <dvaish@berkeley.edu> and contributors"]
 version = "0.1.0"
 
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+
 [compat]
 julia = "1"
 
