@@ -37,7 +37,7 @@ function dataframe(individual::Individual)
     return DataFrame(
         :ID => id, 
         :TIME => time,
-        :EVID => amt .>= 0, # What if dose is zero for EVID == 1
+        :EVID => Integer.(amt .> 0), # What if dose is zero for EVID == 1
         :AMT => amt,
         :DV => dv,
         covs...
