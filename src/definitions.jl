@@ -27,7 +27,7 @@ function dataframe(individual::Individual)
     time = vcat(individual.dosing, individual.observations)
     entries = length(time)
     amt = zeros(entries)
-    amt[1:length(individual.dosing)] .= individual.dose
+    amt[1:length(individual.dosing)] .= coalesce(individual.dose, 0)
     indices = sortperm(time)
     covs = map((key, value) -> key => fill(value, entries), keys(individual.covariates), values(individual.covariates))
     id = fill(individual.id, entries)
