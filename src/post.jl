@@ -5,8 +5,8 @@ function multifilter(;conditions...)
     return f
 end
 
-function timeify(results::AbstractDataFrame, )
-
+function timeify(results::AbstractDataFrame)
+end
 
 function ss!(data, metric::Symbol, x0::Pair, xF::Pair; col::Union{Symbol, AbstractString} = :ss)
     initial = filter(PKPD._filter(;x0), data)[metric]
