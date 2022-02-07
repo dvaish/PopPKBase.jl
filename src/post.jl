@@ -1,4 +1,4 @@
-including("definitions.jl")
+include("definitions.jl")
 
 function multifilter(;conditions...)
     f = (x) -> all(map((k, v) -> x[k] == v, keys(conditions), values(conditions)))
