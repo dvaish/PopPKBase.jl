@@ -1,7 +1,12 @@
+including("definitions.jl")
+
 function multifilter(;conditions...)
     f = (x) -> all(map((k, v) -> x[k] == v, keys(conditions), values(conditions)))
     return f
 end
+
+function timeify(results::AbstractDataFrame, )
+
 
 function ss!(data, metric::Symbol, x0::Pair, xF::Pair; col::Union{Symbol, AbstractString} = :ss)
     initial = filter(PKPD._filter(;x0), data)[metric]
