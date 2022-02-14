@@ -5,16 +5,19 @@ function multifilter(;conditions...)
     return f
 end
 
-function timeify(results::AbstractDataFrame)
+function timeify(results::AbstractDataFrame, var; id = :ID)
+    gdf = groupby(results, [id])
+    df = combine(gdf, var => x -> [x])
+    return df
 end
 
 function ss!(data, metric::Symbol, x0::Pair, xF::Pair; col::Union{Symbol, AbstractString} = :ss)
-    initial = filter(PKPD._filter(;x0), data)[metric]
-    final = filter(PKPD._filter(;xF), data)[metric]
+    initial = filter(PKPD.multifilter(;x0), data)[metric]
+    final = filter(PKPD.multifilter(;xF), data)[metric]
 
     @assert !(col in names(data)) "Column already exists"
     @assert length(initial) == length(final) "Initial and finals vectors are of different lengths"
-    data[!, col] = initial - final
+    data[!, col] = final - initial
     return nothing
 end
    
