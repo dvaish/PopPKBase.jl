@@ -13,7 +13,34 @@ end
 
 struct Cohort
     individuals
-    length # ::Int
+    length
+    function Cohort(individuals)
+        return new(individuals, length(individuals))
+    end
+end
+
+struct Run
+    id::Symbol
+    dose::Symbol
+    obs::Symbol
+    covariates::Tuple{Union{Symbol, String}}
+    data::DataFrame
+end
+
+@inline function getter(run::Run, field::Union{Symbol, String})
+    return run.data[getfield(run, field)]
+end
+
+function id(run::Run)
+    return getter(run, :id)
+end
+
+function dose(run::Run)
+    return getter(run, :dose)
+end
+
+function obs(run::Run)
+    return getter(run, :obs)
 end
 
 function dataframe(cohort::Cohort)

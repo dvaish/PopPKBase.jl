@@ -11,12 +11,15 @@ function timeify(results::AbstractDataFrame, var; id = :ID)
     return df
 end
 
-function bins(var, bins, values; minimum = missing)
-    @assert (length(bins) == length(values)) "Mismatch in bin dimensions"
-    bin = sum(var .>= bins) 
+function bins(var::Number, edges, values; minimum = missing)
+    @assert (length(edges) == length(values)) "Mismatch in bin dimensions"
+    bin = sum(var .>= edges) 
     return bin == 0 ? minimum : values[bin]
 end
 
+function bins(vector::AbstractArray, edges, values; minimum = missing)
+    return bins.(vector, Ref(edges), Ref(values), minimum = minimum)
+end
 
 function ss!(data, metric::Symbol, x0::Pair, xF::Pair; col::Union{Symbol, AbstractString} = :ss)
     initial = filter(PKPD.multifilter(;x0), data)[metric]
