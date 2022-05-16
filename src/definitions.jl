@@ -21,7 +21,7 @@ function Cohort(population)
     return Cohort(population, length(population))
 end
 
-function Cohort(individuals, f)
+function cohort(individuals, f)
     population = map(f, individuals)
     return Cohort(population)
 end
