@@ -56,9 +56,8 @@ end
 # end
 
 function DataFrames.DataFrame(cohort::Cohort)
-    individuals = map(ind -> append!(df, DataFrame(ind)), cohort.population)
-    dataframe = vcat(individuals...)
-    return dataframe
+    individuals = map(ind -> DataFrame(ind), cohort.population)
+    return vcat(individuals...)
 end
 
 
