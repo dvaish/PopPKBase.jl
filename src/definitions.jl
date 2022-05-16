@@ -18,7 +18,7 @@ struct Cohort
 end
 
 function Cohort(population)
-    return new(population, length(population))
+    return Cohort(population, length(population))
 end
 
 function Cohort(individuals, f)
